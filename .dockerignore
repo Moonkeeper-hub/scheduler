@@ -1,0 +1,8 @@
+.git
+node_modules
+dist
+test
+*.xlsx
+*.csv
+schedule-project*.json
+schedule-publication*.json
