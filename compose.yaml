@@ -1,0 +1,12 @@
+services:
+  schedule:
+    build: .
+    ports:
+      - "127.0.0.1:8092:80"
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+    security_opt:
+      - no-new-privileges:true

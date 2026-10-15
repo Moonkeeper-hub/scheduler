@@ -1,0 +1,1 @@
+import{mkdir,cp,rm}from'node:fs/promises';await rm('dist',{recursive:true,force:true});await mkdir('dist');for(const p of ['index.html','src','public'])await cp(p,'dist/'+p,{recursive:true});console.log('Static build: dist/');
