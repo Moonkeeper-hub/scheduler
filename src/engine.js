@@ -1,5 +1,5 @@
 export const days=['Пн','Вт','Ср','Чт','Пт','Сб'];
-export const times=['08:30–10:00','10:20–11:50','12:20–13:50','14:10–15:40','16:00–17:30','17:50–19:20','19:30–21:00'];
+export const times=['09:00–10:30','10:40–12:10','12:40–14:10','14:20–15:50','16:20–17:50','18:00–19:30','19:40–21:10'];
 export const uid=()=>globalThis.crypto.randomUUID();
 export const intersects=(a,b)=>a.day===b.day&&a.pair===b.pair&&(a.week==='both'||b.week==='both'||a.week===b.week);
 export function load(p,id){return p.assignments.filter(a=>a.teacher===id).reduce((n,a)=>n+(a.week==='both'?1:.5),0)}
