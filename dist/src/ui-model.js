@@ -2,7 +2,6 @@ import {complete,groupReady,load,slotBundle} from './engine.js';
 export const normalizeSearch=s=>String(s??'').toLocaleLowerCase('ru').replace(/ё/g,'е').trim();
 const alphabet=new Intl.Collator('ru',{numeric:true,sensitivity:'base'});
 export function sortedDirectory(items,kind){return [...items].sort((a,b)=>{
- if(kind==='teachers'){const chief=x=>/^преподаватель\b/iu.test(normalizeSearch(x.name))||normalizeSearch(x.name).split(/\s+/)[0]==='преподаватель';const delta=Number(chief(b))-Number(chief(a));if(delta)return delta}
  return alphabet.compare(a.name||a.code,b.name||b.code);
 })}
 export function directoryItems(p,kind,{query='',filter='',day='',week=''}={}){

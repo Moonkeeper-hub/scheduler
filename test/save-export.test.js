@@ -1,5 +1,6 @@
+import {fixture as demo} from './fixture.js';
 import {test} from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
-import {demo} from '../src/engine.js';import {save,projectFilename,exportExcel,readFile} from '../src/io.js';import {scheduleXML} from '../src/excel-layout.js';
+import {save,projectFilename,exportExcel,readFile} from '../src/io.js';import {scheduleXML} from '../src/excel-layout.js';
 const context={};vm.createContext(context);vm.runInContext(fs.readFileSync(new URL('../public/vendor/xlsx.full.min.js',import.meta.url),'utf8'),context);globalThis.window={XLSX:context.XLSX};
 test('safe title filenames preserve Cyrillic',()=>{assert.equal(projectFilename({title:'Осень 2026'}),'Осень 2026.json');assert.equal(projectFilename({title:'A/B: C'}),'A_B_ C.json');assert.equal(projectFilename({title:'CON'}),'_CON.json')});
 test('existing file is not written when confirmation declined; cancellation is not saved',async()=>{let written=false;window.showSaveFilePicker=async()=>({name:'test.json',getFile:async()=>({size:5}),createWritable:async()=>{written=true}});window.confirm=()=>false;assert.equal(await save(demo()),false);assert.equal(written,false);window.showSaveFilePicker=async()=>{throw Object.assign(new Error(),{name:'AbortError'})};assert.equal(await save(demo()),false)});
